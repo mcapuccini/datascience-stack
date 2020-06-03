@@ -12,7 +12,6 @@ script:
   - >
     docker build 
     -t ${TRAVIS_REPO_SLUG}
-    -f .devcontainer/Dockerfile 
     --cache-from ${TRAVIS_REPO_SLUG}
     .
 
