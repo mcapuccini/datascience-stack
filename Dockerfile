@@ -34,6 +34,7 @@ ENV Z_VERSION=${Z_VERSION}
 ENV Z_HOME=/usr/zeppelin-$Z_VERSION
 ENV ZEPPELIN_HOME=$Z_HOME
 ENV ZEPPELIN_CLASSPATH=${HADOOP_CLASSPATH}
+ENV ZEPPELIN_ADDR="0.0.0.0"
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -81,7 +82,7 @@ RUN apt-get update \
     # Create a non-root user to use if preferred
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # Switch back to dialog
