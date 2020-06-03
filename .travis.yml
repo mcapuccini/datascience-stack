@@ -1,0 +1,24 @@
+language: python
+
+branches:
+  only:
+    - master
+
+services:
+  - docker
+
+script:
+  - docker pull ${TRAVIS_REPO_SLUG}:${TAG} || true
+  - >
+    docker build 
+    -t ${TRAVIS_REPO_SLUG}:${TAG}
+    -f .devcontainer/Dockerfile 
+    --cache-from ${TRAVIS_REPO_SLUG}:${TAG}
+    .
+
+after_success:
+  - >
+    if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      docker push ${TRAVIS_REPO_SLUG}:${TAG}
+    fi
