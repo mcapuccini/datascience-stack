@@ -1,5 +1,5 @@
 # Start from tensrflow, pytorch (or similar)
-ARG BASE_IMAGE=tensorflow/tensorflow:2.2.0-jupyter
+ARG BASE_IMAGE=tensorflow/tensorflow:2.2.0
 FROM $BASE_IMAGE
 
 # Non-root user with sudo access
