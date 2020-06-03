@@ -7,9 +7,5 @@ A Docker image for data science.
 
 ### Start Zeppelin
 ```
-docker run -d \
-  --name zeppelin \
-  -p 8080:8080 \
-  mcapuccini/datascience-stack \
-  sh -c '$Z_HOME/bin/zeppelin.sh'
+docker run -d --name zeppelin -p 8080:8080 mcapuccini/datascience-stack
 ```
