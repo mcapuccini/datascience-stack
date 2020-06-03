@@ -8,17 +8,17 @@ services:
   - docker
 
 script:
-  - docker pull ${TRAVIS_REPO_SLUG}:${TAG} || true
+  - docker pull ${TRAVIS_REPO_SLUG} || true
   - >
     docker build 
-    -t ${TRAVIS_REPO_SLUG}:${TAG}
+    -t ${TRAVIS_REPO_SLUG}
     -f .devcontainer/Dockerfile 
-    --cache-from ${TRAVIS_REPO_SLUG}:${TAG}
+    --cache-from ${TRAVIS_REPO_SLUG}
     .
 
 after_success:
   - >
     if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-      docker push ${TRAVIS_REPO_SLUG}:${TAG}
+      docker push ${TRAVIS_REPO_SLUG}
     fi
