@@ -77,7 +77,9 @@ RUN apt-get update \
     && chown -R root:root "$Z_HOME" \
     #
     # Pip deps
-    && pip install pandasql==0.7.3 \
+    && pip install \
+    pandasql==0.7.3 \
+    matplotlib==3.2.1 \
     #
     # Create a non-root user to use if preferred
     && groupadd --gid $USER_GID $USERNAME \
